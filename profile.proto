@@ -13,8 +13,11 @@ package login;
 service Profile {
     rpc createOrUpdateProfile(CreateProfileRequest) returns (UserProfileProto) {}
     rpc getProfileById(GetProfileRequest) returns (UserProfileProto) {}
+    // returns a pre-signed Url to upload profile image.
     rpc getProfileImageUploadUrl(ProfileImageUploadRequest) returns (ProfileImageUploadURL) {}
     rpc getProfilesByAttribute(AttributeRequest) returns (AttributeResponse) {}
+    // directly takes input of profile image and uploads the image.
+    rpc UploadProfileImage(stream UploadImageRequest) returns (UploadImageResponse) {};
 }
 
 //all are optional. If any of the field is not set, old value will be retained.
@@ -53,4 +56,12 @@ message AttributeRequest {
 
 message AttributeResponse {
     repeated UserProfileProto profiles = 1;
+}
+
+message UploadImageRequest {
+    bytes chunkData = 1;
+}
+
+message UploadImageResponse {
+    string uploadPath = 1;
 }
