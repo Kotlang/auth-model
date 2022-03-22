@@ -17,7 +17,7 @@ service Profile {
     rpc getProfileImageUploadUrl(ProfileImageUploadRequest) returns (ProfileImageUploadURL) {}
     rpc getProfilesByAttribute(AttributeRequest) returns (AttributeResponse) {}
     // directly takes input of profile image and uploads the image.
-    rpc UploadProfileImage(stream UploadImageRequest) returns (UploadImageResponse) {};
+    rpc UploadProfileImage(stream UploadImageRequest) returns (UploadImageResponse) {}
 }
 
 //all are optional. If any of the field is not set, old value will be retained.
