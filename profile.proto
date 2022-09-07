@@ -13,6 +13,7 @@ package login;
 service Profile {
     rpc createOrUpdateProfile(CreateProfileRequest) returns (UserProfileProto) {}
     rpc getProfileById(GetProfileRequest) returns (UserProfileProto) {}
+    rpc bulkGetProfileByIds(BulkGetProfileRequest) returns (BulkGetProfileResponse) {}
     // returns a pre-signed Url to upload profile image.
     rpc getProfileImageUploadUrl(ProfileImageUploadRequest) returns (ProfileImageUploadURL) {}
     rpc getProfilesByAttribute(AttributeRequest) returns (AttributeResponse) {}
@@ -64,4 +65,12 @@ message UploadImageRequest {
 
 message UploadImageResponse {
     string uploadPath = 1;
+}
+
+message BulkGetProfileRequest {
+    repeated string userIds = 1;
+}
+
+message BulkGetProfileResponse {
+    repeated UserProfileProto profiles = 1;
 }
