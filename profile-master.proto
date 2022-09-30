@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.kotlang.auth.login";
+option java_outer_classname = "ProfileInternal";
+
+option go_package = "github.com/Kotlang/authGo/generated";
+
+package login;
+
+service ProfileMaster {
+    rpc GetProfileMaster(GetProfileMasterRequest) returns (ProfileMasterResponse) {}
+}
+
+message GetProfileMasterRequest {
+    string language = 1;
+}
+
+message ProfileMasterResponse {
+    repeated ProfileMasterProto profileMasterList = 1;
+}
+
+message ProfileMasterProto {
+    string field = 1;
+    string type = 2;
+    repeated string options = 3;
+}
