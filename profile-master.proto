@@ -10,7 +10,10 @@ package login;
 
 service ProfileMaster {
     rpc GetProfileMaster(GetProfileMasterRequest) returns (ProfileMasterResponse) {}
+    rpc BulkGetProfileMaster(BulkGetProfileMasterRequest) returns (ProfileMasterResponse) {}
 }
+
+// Profile Master
 
 message GetProfileMasterRequest {
     string language = 1;
@@ -25,3 +28,7 @@ message ProfileMasterProto {
     string type = 2;
     repeated string options = 3;
 }
+
+// Bulk Profile Master
+
+message BulkGetProfileMasterRequest {}
