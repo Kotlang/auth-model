@@ -11,6 +11,7 @@ package login;
 service ProfileMaster {
     rpc GetProfileMaster(GetProfileMasterRequest) returns (ProfileMasterResponse) {}
     rpc BulkGetProfileMaster(BulkGetProfileMasterRequest) returns (ProfileMasterResponse) {}
+    rpc DeleteProfileMaster(DeleteProfileMasterRequest) returns (DeleteProfileMasterResponse) {}
 }
 
 // Profile Master
@@ -32,3 +33,11 @@ message ProfileMasterProto {
 // Bulk Profile Master
 
 message BulkGetProfileMasterRequest {}
+
+// Delete Profile Master
+message DeleteProfileMasterRequest {
+    string id = 1;
+}
+message DeleteProfileMasterResponse {
+    string status = 1;
+}
