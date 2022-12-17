@@ -10,7 +10,12 @@ package login;
 
 service ProfileMaster {
     rpc GetProfileMaster(GetProfileMasterRequest) returns (ProfileMasterResponse) {}
+    rpc BulkGetProfileMaster(BulkGetProfileMasterRequest) returns (ProfileMasterResponse) {}
+    rpc DeleteProfileMaster(DeleteProfileMasterRequest) returns (DeleteProfileMasterResponse) {}
+    rpc AddProfileMaster(AddProfileMasterRequest) returns (ProfileMasterProto) {}
 }
+
+// Profile Master
 
 message GetProfileMasterRequest {
     string language = 1;
@@ -21,7 +26,28 @@ message ProfileMasterResponse {
 }
 
 message ProfileMasterProto {
+    string id = 1;
+    string field = 2;
+    string type = 3;
+    repeated string options = 4;
+}
+
+// Bulk Profile Master
+
+message BulkGetProfileMasterRequest {}
+
+// Delete Profile Master
+message DeleteProfileMasterRequest {
+    string id = 1;
+}
+message DeleteProfileMasterResponse {
+    string status = 1;
+}
+
+// Add Profile Master
+message AddProfileMasterRequest {
     string field = 1;
     string type = 2;
-    repeated string options = 3;
+    string language = 3;
+    repeated string options = 4;
 }
