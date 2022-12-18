@@ -13,6 +13,7 @@ service ProfileMaster {
     rpc BulkGetProfileMaster(BulkGetProfileMasterRequest) returns (ProfileMasterResponse) {}
     rpc DeleteProfileMaster(DeleteProfileMasterRequest) returns (DeleteProfileMasterResponse) {}
     rpc AddProfileMaster(AddProfileMasterRequest) returns (ProfileMasterProto) {}
+    rpc UpdateProfileMaster(ProfileMasterProto) returns (ProfileMasterProto) {}
 }
 
 // Profile Master
@@ -29,7 +30,8 @@ message ProfileMasterProto {
     string id = 1;
     string field = 2;
     string type = 3;
-    repeated string options = 4;
+    string language = 4;
+    repeated string options = 5;
 }
 
 // Bulk Profile Master
