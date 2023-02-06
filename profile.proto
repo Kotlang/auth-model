@@ -31,6 +31,7 @@ message CreateProfileRequest {
     repeated string attributes = 8;
     map<string, AddressProto> addresses = 3;
     //serialized json of static metadata for user profile.
+    // TODO: change to [ { "field": "", "value": "", "type": "" } ]
     string metaDataMap = 9;
 }
 
