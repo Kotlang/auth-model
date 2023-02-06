@@ -31,6 +31,7 @@ message ProfileMasterResponse {
 message ProfileMasterProto {
     string id = 1;
     string field = 2;
+    // TODO: Change to enum.
     string type = 3;
     string language = 4;
     repeated string options = 5;
