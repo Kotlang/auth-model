@@ -15,11 +15,17 @@ message AddressProto {
     string address = 4;
 }
 
+enum Gender {
+    Male = 0;
+    Female = 1;
+    Other = 2;
+}
+
 message UserProfileProto {
     string loginId = 1;
     string name = 2;
     string photoUrl = 3;
-    string gender = 4;
+    Gender gender = 4;
     bool isVerified = 5;
     string domain = 6;
     string preferredLanguage = 7;

@@ -25,7 +25,7 @@ service Profile {
 //For e.g. to update just photoUrl, send only photoUrl in below proto
 message CreateProfileRequest {
     string name = 2;
-    string gender = 4;
+    Gender gender = 4;
     string photoUrl = 5;
     string preferredLanguage = 7;
     repeated string attributes = 8;
