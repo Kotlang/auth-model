@@ -11,10 +11,13 @@ package login;
 service ProfileMaster {
     rpc GetProfileMaster(GetProfileMasterRequest) returns (ProfileMasterResponse) {}
     
-    // admin APIs
+    // admin API
     rpc BulkGetProfileMaster(BulkGetProfileMasterRequest) returns (ProfileMasterResponse) {}
+    // admin API
     rpc DeleteProfileMaster(DeleteProfileMasterRequest) returns (DeleteProfileMasterResponse) {}
+    // admin API
     rpc AddProfileMaster(AddProfileMasterRequest) returns (ProfileMasterProto) {}
+    // admin API
     rpc UpdateProfileMaster(ProfileMasterProto) returns (ProfileMasterProto) {}
 }
 
