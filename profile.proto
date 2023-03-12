@@ -21,6 +21,19 @@ service Profile {
     rpc UploadProfileImage(stream UploadImageRequest) returns (UploadImageResponse) {}
 }
 
+enum DataType {
+    string = 0;
+    int = 1;
+    double = 2; 
+    boolean = 3;
+}
+
+message ProfileMetaData {
+    string field = 1;
+    string value = 2;
+    DataType type = 3;
+}
+
 //all are optional. If any of the field is not set, old value will be retained.
 //For e.g. to update just photoUrl, send only photoUrl in below proto
 message CreateProfileRequest {
@@ -30,9 +43,8 @@ message CreateProfileRequest {
     string preferredLanguage = 7;
     repeated string attributes = 8;
     map<string, AddressProto> addresses = 3;
-    //serialized json of static metadata for user profile.
-    // TODO: change to [ { "field": "", "value": "", "type": "" } ]
-    string metaDataMap = 9;
+    
+    repeated ProfileMetaData metaDataMap = 9;
 }
 
 //user id is optional. If user Id is not provided,
