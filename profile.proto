@@ -24,15 +24,20 @@ service Profile {
 //all are optional. If any of the field is not set, old value will be retained.
 //For e.g. to update just photoUrl, send only photoUrl in below proto
 message CreateProfileRequest {
-    string name = 2;
-    Gender gender = 4;
-    string photoUrl = 5;
-    string preferredLanguage = 7;
-    repeated string attributes = 8;
-    map<string, AddressProto> addresses = 3;
+    string name = 1;
+    Gender gender = 2;
+    string photoUrl = 3;
+    string bio = 4;
+    map<string, AddressProto> addresses = 5;
+    string preferredLanguage = 6;
+    FarmingType farmingType = 7;
+    repeated string crops = 8;
+    repeated string attributes = 9;
+    CertificationDetails certificationDetails = 10;
+    int32 yearsSinceOrganicFarming = 11;
     //serialized json of static metadata for user profile.
     // TODO: change to [ { "field": "", "value": "", "type": "" } ]
-    string metaDataMap = 9;
+    string metaDataMap = 12;
 }
 
 //user id is optional. If user Id is not provided,

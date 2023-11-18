@@ -20,22 +20,39 @@ enum Gender {
     Female = 1;
     Unspecified = 2;
 }
+enum FarmingType{
+    ORGANIC = 0;
+    CHEMICAL = 1;
+    NATURAL = 2;
+}
+
+message CertificationDetails{
+    bool isCertified = 1;
+    string certificationName = 2;
+    string certificationId = 3;
+    string certificationAgency = 4;
+}
 
 message UserProfileProto {
     string loginId = 1;
     string name = 2;
     string photoUrl = 3;
-    Gender gender = 4;
-    bool isVerified = 5;
-    string domain = 6;
-    string preferredLanguage = 7;
-    int64 createdOn = 8;
+    string bio = 4;
+    Gender gender = 5;
+    bool isVerified = 6;
+    FarmingType farmingType = 7;
+    repeated string crops = 8;
+    CertificationDetails certificationDetails = 9;
+    int32 yearsSinceOrganicFarming = 10;
+    string domain = 11;
+    string preferredLanguage = 12;
+    int64 createdOn = 13;
     //serialized json of static metadata for user profile.
-    string metaDataMap = 9;
-    map<string, AddressProto> addresses = 10;
-    string email = 11;
-    string phone = 12;
-    repeated string attributes = 13;
+    string metaDataMap = 14;
+    map<string, AddressProto> addresses = 15;
+    string email = 16;
+    string phone = 17;
+    repeated string attributes = 18;
 }
 
 message StatusResponse {
