@@ -23,7 +23,7 @@ enum Gender {
 enum FarmingType{
     ORGANIC = 0;
     CHEMICAL = 1;
-    NATURAL = 2;
+    MIX = 2;
 }
 
 message CertificationDetails{
