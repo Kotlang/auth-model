@@ -25,6 +25,11 @@ enum FarmingType{
     CHEMICAL = 1;
     MIX = 2;
 }
+enum LandSizeInAcres {
+    LESSTHAN2 = 0;
+    BETWEEN2AND10 = 1;
+    GREATERTHAN10 = 2;
+}
 
 message CertificationDetails{
     bool isCertified = 1;
@@ -53,6 +58,7 @@ message UserProfileProto {
     string email = 16;
     string phone = 17;
     repeated string attributes = 18;
+    LandSizeInAcres landSizeInAcres = 19;
 }
 
 message StatusResponse {

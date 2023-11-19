@@ -81,9 +81,3 @@ message BulkGetProfileRequest {
 message BulkGetProfileResponse {
     repeated UserProfileProto profiles = 1;
 }
-
-enum LandSizeInAcres {
-    LESSTHAN2 = 0;
-    BETWEEN2AND10 = 1;
-    GREATERTHAN10 = 2;
-}
