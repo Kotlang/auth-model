@@ -30,6 +30,10 @@ enum LandSizeInAcres {
     BETWEEN2AND10 = 1;
     GREATERTHAN10 = 2;
 }
+message Location {
+    double lat = 1;
+    double long = 2;
+}
 
 message CertificationDetails{
     bool isCertified = 1;
@@ -59,6 +63,7 @@ message UserProfileProto {
     string phone = 17;
     repeated string attributes = 18;
     LandSizeInAcres landSizeInAcres = 19;
+    Location location = 20;
 }
 
 message StatusResponse {

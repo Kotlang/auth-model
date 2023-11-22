@@ -39,6 +39,7 @@ message CreateProfileRequest {
     // TODO: change to [ { "field": "", "value": "", "type": "" } ]
     string metaDataMap = 12;
     LandSizeInAcres landSizeInAcres = 13;
+    Location location = 14;
 }
 
 //user id is optional. If user Id is not provided,
