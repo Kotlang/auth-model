@@ -19,6 +19,7 @@ service Profile {
     rpc getProfilesByAttribute(AttributeRequest) returns (AttributeResponse) {}
     // directly takes input of profile image and uploads the image.
     rpc UploadProfileImage(stream UploadImageRequest) returns (UploadImageResponse) {}
+    rpc getProfileByPhoneOrEmail(GetProfileByPhoneOrEmailRequest) returns (UserProfileProto) {}
 }
 
 //all are optional. If any of the field is not set, old value will be retained.
@@ -81,4 +82,9 @@ message BulkGetProfileRequest {
 
 message BulkGetProfileResponse {
     repeated UserProfileProto profiles = 1;
+}
+
+message GetProfileByPhoneOrEmailRequest {
+    string phone = 1;
+    string email = 2;
 }
