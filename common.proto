@@ -53,7 +53,6 @@ message UserProfileProto {
     repeated string crops = 8;
     CertificationDetails certificationDetails = 9;
     int32 yearsSinceOrganicFarming = 10;
-    string domain = 11;
     string preferredLanguage = 12;
     int64 createdOn = 13;
     map<string, AddressProto> addresses = 14;
