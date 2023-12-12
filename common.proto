@@ -53,17 +53,14 @@ message UserProfileProto {
     repeated string crops = 8;
     CertificationDetails certificationDetails = 9;
     int32 yearsSinceOrganicFarming = 10;
-    string domain = 11;
     string preferredLanguage = 12;
     int64 createdOn = 13;
-    //serialized json of static metadata for user profile.
-    string metaDataMap = 14;
-    map<string, AddressProto> addresses = 15;
-    string email = 16;
-    string phone = 17;
-    repeated string attributes = 18;
-    LandSizeInAcres landSizeInAcres = 19;
-    Location location = 20;
+    map<string, AddressProto> addresses = 14;
+    string email = 15;
+    string phone = 16;
+    repeated string attributes = 17;
+    LandSizeInAcres landSizeInAcres = 18;
+    Location location = 19;
 }
 
 message StatusResponse {
