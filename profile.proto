@@ -12,7 +12,7 @@ package login;
 
 service Profile {
     rpc createOrUpdateProfile(CreateProfileRequest) returns (UserProfileProto) {}
-    rpc getProfileById(GetProfileRequest) returns (UserProfileProto) {}
+    rpc getProfileById(IdRequest) returns (UserProfileProto) {}
     rpc bulkGetProfileByIds(BulkGetProfileRequest) returns (BulkGetProfileResponse) {}
     // returns a pre-signed Url to upload profile image.
     rpc getProfileImageUploadUrl(ProfileImageUploadRequest) returns (ProfileImageUploadURL) {}
@@ -20,6 +20,7 @@ service Profile {
     // directly takes input of profile image and uploads the image.
     rpc UploadProfileImage(stream UploadImageRequest) returns (UploadImageResponse) {}
     rpc getProfileByPhoneOrEmail(GetProfileByPhoneOrEmailRequest) returns (UserProfileProto) {}
+	rpc isUserAdmin(IdRequest) returns (IsUserAdminResponse) {}
 }
 
 //all are optional. If any of the field is not set, old value will be retained.
@@ -42,7 +43,7 @@ message CreateProfileRequest {
 
 //user id is optional. If user Id is not provided,
 //self profile based on auth token is returned
-message GetProfileRequest {
+message IdRequest {
     string userId = 1;
 }
 
@@ -84,4 +85,8 @@ message BulkGetProfileResponse {
 message GetProfileByPhoneOrEmailRequest {
     string phone = 1;
     string email = 2;
+}
+
+message IsUserAdminResponse {
+	bool isAdmin = 1;
 }
