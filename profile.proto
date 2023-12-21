@@ -13,7 +13,7 @@ package login;
 service Profile {
     rpc createOrUpdateProfile(CreateProfileRequest) returns (UserProfileProto) {}
     rpc getProfileById(IdRequest) returns (UserProfileProto) {}
-    rpc bulkGetProfileByIds(BulkGetProfileRequest) returns (BulkGetProfileResponse) {}
+    rpc bulkGetProfileByIds(BulkGetProfileRequest) returns (ProfileListResponse) {}
     // returns a pre-signed Url to upload profile image.
     rpc getProfileImageUploadUrl(ProfileImageUploadRequest) returns (ProfileImageUploadURL) {}
     rpc getProfilesByAttribute(AttributeRequest) returns (AttributeResponse) {}
@@ -21,7 +21,7 @@ service Profile {
     rpc UploadProfileImage(stream UploadImageRequest) returns (UploadImageResponse) {}
     rpc getProfileByPhoneOrEmail(GetProfileByPhoneOrEmailRequest) returns (UserProfileProto) {}
 	rpc isUserAdmin(IdRequest) returns (IsUserAdminResponse) {}
-    rpc getAllProfiles(GetAllProfilesRequest) returns (GetAllProfilesResponse) {}
+    rpc FetchProfiles(FetchProfilesRequest) returns (ProfileListResponse) {}
 }
 
 //all are optional. If any of the field is not set, old value will be retained.
@@ -50,13 +50,13 @@ message Userfilters {
     LandSizeInAcres landSizeInAcres = 5;
 }
 
-message GetAllProfilesRequest {
+message FetchProfilesRequest {
     Userfilters Filters = 1;
     int32 pageSize = 2;
     int32 pageNumber = 3;
 }
 
-message GetAllProfilesResponse {
+message ProfileListResponse {
     repeated UserProfileProto profiles = 1;
 }
 
@@ -95,10 +95,6 @@ message UploadImageResponse {
 
 message BulkGetProfileRequest {
     repeated string userIds = 1;
-}
-
-message BulkGetProfileResponse {
-    repeated UserProfileProto profiles = 1;
 }
 
 message GetProfileByPhoneOrEmailRequest {
