@@ -21,6 +21,7 @@ service Profile {
     rpc UploadProfileImage(stream UploadImageRequest) returns (UploadImageResponse) {}
     rpc getProfileByPhoneOrEmail(GetProfileByPhoneOrEmailRequest) returns (UserProfileProto) {}
 	rpc isUserAdmin(IdRequest) returns (IsUserAdminResponse) {}
+    rpc getAllProfiles(GetAllProfilesRequest) returns (GetAllProfilesResponse) {}
 }
 
 //all are optional. If any of the field is not set, old value will be retained.
@@ -39,6 +40,24 @@ message CreateProfileRequest {
     int32 yearsSinceOrganicFarming = 11;
     LandSizeInAcres landSizeInAcres = 12;
     Location location = 13;
+}
+
+message Userfilters {
+    string name = 1;
+    Gender gender = 2;
+    FarmingType farmingType = 3;
+    int32 yearsSinceOrganicFarming = 4;
+    LandSizeInAcres landSizeInAcres = 5;
+}
+
+message GetAllProfilesRequest {
+    Userfilters Filters = 1;
+    int32 pageSize = 2;
+    int32 pageNumber = 3;
+}
+
+message GetAllProfilesResponse {
+    repeated UserProfileProto profiles = 1;
 }
 
 //user id is optional. If user Id is not provided,
