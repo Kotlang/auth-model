@@ -15,20 +15,27 @@ message AddressProto {
     string address = 4;
 }
 
+// gender is not updated if it is unspecified
 enum Gender {
-    Male = 0;
-    Female = 1;
-    Unspecified = 2;
+    Unspecified = 0;
+    Male = 1;
+    Female = 2;
 }
+
+// FarmingType is not updated if it is unspecifiedFarming
 enum FarmingType{
-    ORGANIC = 0;
-    CHEMICAL = 1;
-    MIX = 2;
+	UnspecifiedFarming = 0;
+    ORGANIC = 1;
+    CHEMICAL = 2;
+    MIX = 3;
 }
+
+// LandSizeInAcres is not updated if it is unspecifiedLandSize
 enum LandSizeInAcres {
-    LESSTHAN2 = 0;
-    BETWEEN2AND10 = 1;
-    GREATERTHAN10 = 2;
+	UnspecifiedLandSize = 0;
+    LESSTHAN2 = 1;
+    BETWEEN2AND10 = 2;
+    GREATERTHAN10 = 3;
 }
 message Location {
     double lat = 1;
@@ -56,11 +63,9 @@ message UserProfileProto {
     string preferredLanguage = 12;
     int64 createdOn = 13;
     map<string, AddressProto> addresses = 14;
-    string email = 15;
-    string phone = 16;
-    repeated string attributes = 17;
-    LandSizeInAcres landSizeInAcres = 18;
-    Location location = 19;
+    repeated string attributes = 15;
+    LandSizeInAcres landSizeInAcres = 16;
+    Location location = 17;
 }
 
 message StatusResponse {
