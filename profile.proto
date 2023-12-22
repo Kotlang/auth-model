@@ -13,7 +13,7 @@ package login;
 service Profile {
     rpc createOrUpdateProfile(CreateProfileRequest) returns (UserProfileProto) {}
     rpc getProfileById(IdRequest) returns (UserProfileProto) {}
-    rpc bulkGetProfileByIds(BulkGetProfileRequest) returns (BulkGetProfileResponse) {}
+    rpc bulkGetProfileByIds(BulkGetProfileRequest) returns (ProfileListResponse) {}
     // returns a pre-signed Url to upload profile image.
     rpc getProfileImageUploadUrl(ProfileImageUploadRequest) returns (ProfileImageUploadURL) {}
     rpc getProfilesByAttribute(AttributeRequest) returns (AttributeResponse) {}
@@ -21,6 +21,7 @@ service Profile {
     rpc UploadProfileImage(stream UploadImageRequest) returns (UploadImageResponse) {}
     rpc getProfileByPhoneOrEmail(GetProfileByPhoneOrEmailRequest) returns (UserProfileProto) {}
 	rpc isUserAdmin(IdRequest) returns (IsUserAdminResponse) {}
+    rpc FetchProfiles(FetchProfilesRequest) returns (ProfileListResponse) {}
 }
 
 //all are optional. If any of the field is not set, old value will be retained.
@@ -39,6 +40,24 @@ message CreateProfileRequest {
     int32 yearsSinceOrganicFarming = 11;
     LandSizeInAcres landSizeInAcres = 12;
     Location location = 13;
+}
+
+message Userfilters {
+    string name = 1;
+    Gender gender = 2;
+    FarmingType farmingType = 3;
+    int32 yearsSinceOrganicFarming = 4;
+    LandSizeInAcres landSizeInAcres = 5;
+}
+
+message FetchProfilesRequest {
+    Userfilters Filters = 1;
+    int32 pageSize = 2;
+    int32 pageNumber = 3;
+}
+
+message ProfileListResponse {
+    repeated UserProfileProto profiles = 1;
 }
 
 //user id is optional. If user Id is not provided,
@@ -76,10 +95,6 @@ message UploadImageResponse {
 
 message BulkGetProfileRequest {
     repeated string userIds = 1;
-}
-
-message BulkGetProfileResponse {
-    repeated UserProfileProto profiles = 1;
 }
 
 message GetProfileByPhoneOrEmailRequest {
