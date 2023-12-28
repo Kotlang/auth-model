@@ -30,6 +30,7 @@ message CreateGroupRequest {
 	repeated string moderators = 4;
 	repeated string members = 5;
 	string rules = 6;
+	GroupConfig config = 7;
 }
 
 message GroupProto {
@@ -40,6 +41,12 @@ message GroupProto {
 	repeated string moderators = 5;
 	repeated string members = 6;
 	string rules = 7;
+	GroupConfig config = 8;
+}
+
+message GroupConfig {
+	bool newUserRequiresApproval = 1;
+	bool newPostRequiresApproval = 2;
 }
 
 message GroupIdRequest {
