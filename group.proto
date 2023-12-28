@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+import "common.proto";
+
+option java_multiple_files = true;
+option java_package = "com.kotlang.authgo.login";
+option java_outer_classname = "GroupInternal";
+
+option go_package = "github.com/Kotlang/authGo/generated";
+
+package login;
+
+service GroupManagementService {
+	rpc CreateOrUpdateGroup(CreateGroupRequest) returns (GroupProto) {}
+	rpc GetGroupById(GroupIdRequest) returns (GroupProto) {}
+	rpc GetSubscribedGroups(UserIdRequest) returns (GroupListResponse) {}
+	rpc AddUserToGroup(UserGroupRequest) returns (StatusResponse) {}
+	rpc RemoveUserFromGroup(UserGroupRequest) returns (StatusResponse) {}
+	rpc BulkAddUsersToGroup(BulkUserGroupRequest) returns (StatusResponse) {}
+	rpc BulkRemoveUsersFromGroup(BulkUserGroupRequest) returns (StatusResponse) {}
+}
+
+// All fields are optional. Fields with values will be updated and fields with empty values will be ignored.
+// fields moderators and members are arrays of user ids
+// createOrUpdateGroup should not be used to update moderators and members fields as it will just append to existing values
+message CreateGroupRequest {
+	string name = 1;
+	string description = 2;
+	string logoURL = 3;
+	repeated string moderators = 4;
+	repeated string members = 5;
+	string rules = 6;
+}
+
+message GroupProto {
+	string id = 1;
+	string name = 2;
+	string description = 3;
+	string logoURL = 4;
+	repeated string moderators = 5;
+	repeated string members = 6;
+	string rules = 7;
+}
+
+message GroupIdRequest {
+	string groupId = 1;
+}
+
+message UserIdRequest {
+	string userId = 1;
+}
+
+message GroupListResponse {
+	repeated GroupProto groups = 1;
+}
+
+enum GroupRole {
+	default = 0;
+	moderator = 1;
+}
+
+message UserGroupRequest {
+	string groupId = 1;
+	string userId = 2;
+	GroupRole role = 3;
+}
+
+message BulkUserGroupRequest {
+	repeated UserGroupRequest users = 1;
+}

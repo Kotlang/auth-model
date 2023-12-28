@@ -22,7 +22,7 @@ message LoginRequest {
 
 message AuthResponse {
     string jwt = 1;
-    string userType = 2;
+    UserType userType = 2;
     UserProfileProto profile = 3;
 }
 

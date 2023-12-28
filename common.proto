@@ -71,3 +71,9 @@ message UserProfileProto {
 message StatusResponse {
     string status = 1;
 }
+
+enum UserType{
+	DEFAULT = 0;
+	MODERATOR = 1;
+	ADMIN = 2;
+}
