@@ -49,6 +49,11 @@ message CertificationDetails{
     string certificationAgency = 4;
 }
 
+message DeletionInfo {
+    int64 deletionTime = 1;
+    string reason = 2;
+}
+
 message UserProfileProto {
     string loginId = 1;
     string name = 2;
@@ -66,6 +71,7 @@ message UserProfileProto {
     repeated string attributes = 15;
     LandSizeInAcres landSizeInAcres = 16;
     Location location = 17;
+    DeletionInfo deletionInfo = 18;
 }
 
 message StatusResponse {
