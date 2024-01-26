@@ -25,7 +25,7 @@ service Profile {
     rpc requestProfileDeletion(ProfileDeletionRequest) returns (StatusResponse){}
     rpc deleteProfile(IdRequest) returns (StatusResponse){}
     rpc getPendingProfileDeletionRequests(GetProfileDeletionRequest) returns (ProfileListResponse){}
-    rpc unDeleteProfile(IdRequest) returns (StatusResponse){}
+    rpc cancelProfileDeletionRequest(IdRequest) returns (StatusResponse){}
 }
 
 //all are optional. If any of the field is not set, old value will be retained.
