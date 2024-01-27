@@ -19,6 +19,7 @@ service Login {
 message LoginRequest {
     string emailOrPhone = 1;
     string domain = 2;
+    bool restoreAccountRequest = 3;
 }
 
 message AuthResponse {
