@@ -11,6 +11,7 @@ option go_package = "github.com/Kotlang/authGo/generated";
 package login;
 
 service Login {
+    // Login with email or phone sends status response with message "Marked for deletion" if user is marked for deletion
     rpc Login(LoginRequest) returns (StatusResponse) {}
     rpc verify(VerifyRequest) returns (AuthResponse) {}
 }
