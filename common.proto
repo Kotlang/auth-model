@@ -55,7 +55,7 @@ message DeletionInfo {
 }
 
 message UserProfileProto {
-    string loginId = 1;
+    string userId = 1;
     string name = 2;
     string photoUrl = 3;
     string bio = 4;
