@@ -26,6 +26,9 @@ service Profile {
     rpc deleteProfile(IdRequest) returns (StatusResponse){}
     rpc getPendingProfileDeletionRequests(GetProfileDeletionRequest) returns (ProfileListResponse){}
     rpc cancelProfileDeletionRequest(IdRequest) returns (StatusResponse){}
+    rpc changeUserType(ChangeUserTypeRequest) returns (StatusResponse) {}
+    rpc blockUser(IdRequest) returns (StatusResponse) {}
+    rpc unblockUser(IdRequest) returns (StatusResponse) {}
 }
 
 //all are optional. If any of the field is not set, old value will be retained.
@@ -62,6 +65,7 @@ message FetchProfilesRequest {
 
 message ProfileListResponse {
     repeated UserProfileProto profiles = 1;
+    int64 totalUsers = 2;
 }
 
 //user id is optional. If user Id is not provided,
@@ -117,4 +121,14 @@ message GetProfileDeletionRequest {
 
 message ProfileDeletionRequest {
     string reason = 1;
+}
+
+message ChangeUserTypeRequest {
+    string emailOrPhone = 1;
+    UserType userType = 2;
+}
+
+enum UserType {
+    default = 0;
+    admin = 1;
 }
