@@ -72,6 +72,7 @@ message UserProfileProto {
     LandSizeInAcres landSizeInAcres = 16;
     Location location = 17;
     DeletionInfo deletionInfo = 18;
+    string phoneNumber = 19; //admin only field, should be kept empty for all non admin requests
 }
 
 message StatusResponse {
