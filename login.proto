@@ -20,6 +20,8 @@ message LoginRequest {
     string emailOrPhone = 1;
     string domain = 2;
     bool restoreAccountRequest = 3;
+    // optional, checks if user is already exists or not, if not, otp will not be sent
+    bool alreadyExists = 4;
 }
 
 message AuthResponse {
