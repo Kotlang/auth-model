@@ -75,6 +75,15 @@ message UserProfileProto {
     string phoneNumber = 19; //admin only field, should be kept empty for all non admin requests
 }
 
+message ProfileListResponse {
+    repeated UserProfileProto profiles = 1;
+    int64 totalUsers = 2;
+}
+
 message StatusResponse {
     string status = 1;
+}
+
+message IdRequest {
+    string userId = 1;
 }

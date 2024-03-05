@@ -20,15 +20,7 @@ service Profile {
     // directly takes input of profile image and uploads the image.
     rpc UploadProfileImage(stream UploadImageRequest) returns (UploadImageResponse) {}
     rpc getProfileByPhoneOrEmail(GetProfileByPhoneOrEmailRequest) returns (UserProfileProto) {}
-	rpc isUserAdmin(IdRequest) returns (IsUserAdminResponse) {}
     rpc FetchProfiles(FetchProfilesRequest) returns (ProfileListResponse) {}
-    rpc requestProfileDeletion(ProfileDeletionRequest) returns (StatusResponse){}
-    rpc deleteProfile(IdRequest) returns (StatusResponse){}
-    rpc getPendingProfileDeletionRequests(GetProfileDeletionRequest) returns (ProfileListResponse){}
-    rpc cancelProfileDeletionRequest(IdRequest) returns (StatusResponse){}
-    rpc changeUserType(ChangeUserTypeRequest) returns (StatusResponse) {}
-    rpc blockUser(IdRequest) returns (StatusResponse) {}
-    rpc unblockUser(IdRequest) returns (StatusResponse) {}
 }
 
 //all are optional. If any of the field is not set, old value will be retained.
@@ -61,17 +53,6 @@ message FetchProfilesRequest {
     Userfilters Filters = 1;
     int32 pageSize = 2;
     int32 pageNumber = 3;
-}
-
-message ProfileListResponse {
-    repeated UserProfileProto profiles = 1;
-    int64 totalUsers = 2;
-}
-
-//user id is optional. If user Id is not provided,
-//self profile based on auth token is returned
-message IdRequest {
-    string userId = 1;
 }
 
 message ProfileImageUploadRequest {
@@ -108,28 +89,4 @@ message BulkGetProfileRequest {
 message GetProfileByPhoneOrEmailRequest {
     string phone = 1;
     string email = 2;
-}
-
-message IsUserAdminResponse {
-	bool isAdmin = 1;
-}
-
-message GetProfileDeletionRequest {
-    int32 pageSize = 1;
-    int32 pageNumber = 2;
-}
-
-message ProfileDeletionRequest {
-    string reason = 1;
-}
-
-message ChangeUserTypeRequest {
-    string email = 1;
-    string phone = 2;
-    UserType userType = 3;
-}
-
-enum UserType {
-    default = 0;
-    admin = 1;
 }
