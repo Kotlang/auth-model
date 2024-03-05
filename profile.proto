@@ -10,17 +10,33 @@ option go_package = "github.com/Kotlang/authGo/generated";
 
 package login;
 
+// Profile service handles RPCs related to user profiles.
+// An interceptor ensures users are not blocked or marked for deletion, if so a codes.PermissionDenied error is returned.
+// The expected behaviour from the client is to logout the user for the codes.PermissionDenied error.
 service Profile {
+
+    // Create or update a user profile. If the profile already exists, it will be updated. 
+    // All fields are optional except the name field. Fields that are not set will be retained from the existing profile.
     rpc createOrUpdateProfile(CreateProfileRequest) returns (UserProfileProto) {}
+
+    // Get the profile of the user by the user's id. Blocked or users marked will lead to codes.PermissionDenied error.
     rpc getProfileById(IdRequest) returns (UserProfileProto) {}
+
+    // Get the profile of the user by the user's id. Any user that is not blocked or marked for deletion can be fetched.
     rpc bulkGetProfileByIds(BulkGetProfileRequest) returns (ProfileListResponse) {}
+
     // returns a pre-signed Url to upload profile image.
     rpc getProfileImageUploadUrl(ProfileImageUploadRequest) returns (ProfileImageUploadURL) {}
-    rpc getProfilesByAttribute(AttributeRequest) returns (AttributeResponse) {}
+
     // directly takes input of profile image and uploads the image.
     rpc UploadProfileImage(stream UploadImageRequest) returns (UploadImageResponse) {}
+
+    // Admin only APIs
     rpc getProfileByPhoneOrEmail(GetProfileByPhoneOrEmailRequest) returns (UserProfileProto) {}
     rpc FetchProfiles(FetchProfilesRequest) returns (ProfileListResponse) {}
+
+    // not implemented
+    rpc getProfilesByAttribute(AttributeRequest) returns (AttributeResponse) {}
 }
 
 //all are optional. If any of the field is not set, old value will be retained.

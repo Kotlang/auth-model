@@ -11,14 +11,16 @@ option go_package = "github.com/Kotlang/authGo/generated";
 package login;
 
 service loginVerified {
+	rpc requestProfileDeletion(ProfileDeletionRequest) returns (StatusResponse){}
+	
+	// Admin only APIs
+    rpc cancelProfileDeletionRequest(IdRequest) returns (StatusResponse){}
     rpc blockUser(IdRequest) returns (StatusResponse) {}
     rpc unblockUser(IdRequest) returns (StatusResponse) {}
 	rpc changeUserType(ChangeUserTypeRequest) returns (StatusResponse) {}
 	rpc isUserAdmin(IdRequest) returns (IsUserAdminResponse) {}
-	rpc requestProfileDeletion(ProfileDeletionRequest) returns (StatusResponse){}
     rpc deleteProfile(IdRequest) returns (StatusResponse){}
     rpc getPendingProfileDeletionRequests(GetProfileDeletionRequest) returns (ProfileListResponse){}
-    rpc cancelProfileDeletionRequest(IdRequest) returns (StatusResponse){}
 }
 
 message IsUserAdminResponse {

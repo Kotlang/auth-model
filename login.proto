@@ -11,8 +11,12 @@ option go_package = "github.com/Kotlang/authGo/generated";
 package login;
 
 service Login {
-    // Login with email or phone sends status response with message "Marked for deletion" if user is marked for deletion
+    // Login with email or phone 
+    // if user is blocked or marked for deletion, then error will be returned (codes.permissionDenied)
+    // if user wants to restore the account, then restoreAccountRequest should be set to true
     rpc Login(LoginRequest) returns (StatusResponse) {}
+
+    // Verify the otp
     rpc verify(VerifyRequest) returns (AuthResponse) {}
 }
 

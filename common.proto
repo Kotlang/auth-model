@@ -73,6 +73,7 @@ message UserProfileProto {
     Location location = 17;
     DeletionInfo deletionInfo = 18;
     string phoneNumber = 19; //admin only field, should be kept empty for all non admin requests
+    int64 lastActive = 20;
 }
 
 message ProfileListResponse {
