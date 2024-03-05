@@ -4,7 +4,7 @@ import "common.proto";
 
 option java_multiple_files = true;
 option java_package = "com.kotlang.auth.login";
-option java_outer_classname = "LoginInternal";
+option java_outer_classname = "LoginVerifiedInternal";
 
 option go_package = "github.com/Kotlang/authGo/generated";
 
