@@ -10,23 +10,33 @@ option go_package = "github.com/Kotlang/authGo/generated";
 
 package login;
 
+// Profile service handles RPCs related to user profiles.
+// An interceptor ensures users are not blocked or marked for deletion, if so a codes.PermissionDenied error is returned.
+// The expected behaviour from the client is to logout the user for the codes.PermissionDenied error.
 service Profile {
+
+    // Create or update a user profile. If the profile already exists, it will be updated. 
+    // All fields are optional except the name field. Fields that are not set will be retained from the existing profile.
     rpc createOrUpdateProfile(CreateProfileRequest) returns (UserProfileProto) {}
+
+    // Get the profile of the user by the user's id. Blocked or users marked will lead to codes.PermissionDenied error.
     rpc getProfileById(IdRequest) returns (UserProfileProto) {}
+
+    // Get the profile of the user by the user's id. Any user that is not blocked or marked for deletion can be fetched.
     rpc bulkGetProfileByIds(BulkGetProfileRequest) returns (ProfileListResponse) {}
+
     // returns a pre-signed Url to upload profile image.
     rpc getProfileImageUploadUrl(ProfileImageUploadRequest) returns (ProfileImageUploadURL) {}
-    rpc getProfilesByAttribute(AttributeRequest) returns (AttributeResponse) {}
+
     // directly takes input of profile image and uploads the image.
     rpc UploadProfileImage(stream UploadImageRequest) returns (UploadImageResponse) {}
+
+    // Admin only APIs
     rpc getProfileByPhoneOrEmail(GetProfileByPhoneOrEmailRequest) returns (UserProfileProto) {}
-	rpc isUserAdmin(IdRequest) returns (IsUserAdminResponse) {}
     rpc FetchProfiles(FetchProfilesRequest) returns (ProfileListResponse) {}
-    rpc requestProfileDeletion(ProfileDeletionRequest) returns (StatusResponse){}
-    rpc deleteProfile(IdRequest) returns (StatusResponse){}
-    rpc getPendingProfileDeletionRequests(GetProfileDeletionRequest) returns (ProfileListResponse){}
-    rpc cancelProfileDeletionRequest(IdRequest) returns (StatusResponse){}
-    rpc changeUserType(ChangeUserTypeRequest) returns (StatusResponse) {}
+
+    // not implemented
+    rpc getProfilesByAttribute(AttributeRequest) returns (AttributeResponse) {}
 }
 
 //all are optional. If any of the field is not set, old value will be retained.
@@ -59,17 +69,6 @@ message FetchProfilesRequest {
     Userfilters Filters = 1;
     int32 pageSize = 2;
     int32 pageNumber = 3;
-}
-
-message ProfileListResponse {
-    repeated UserProfileProto profiles = 1;
-    int64 totalUsers = 2;
-}
-
-//user id is optional. If user Id is not provided,
-//self profile based on auth token is returned
-message IdRequest {
-    string userId = 1;
 }
 
 message ProfileImageUploadRequest {
@@ -106,28 +105,4 @@ message BulkGetProfileRequest {
 message GetProfileByPhoneOrEmailRequest {
     string phone = 1;
     string email = 2;
-}
-
-message IsUserAdminResponse {
-	bool isAdmin = 1;
-}
-
-message GetProfileDeletionRequest {
-    int32 pageSize = 1;
-    int32 pageNumber = 2;
-}
-
-message ProfileDeletionRequest {
-    string reason = 1;
-}
-
-message ChangeUserTypeRequest {
-    string email = 1;
-    string phone = 2;
-    UserType userType = 3;
-}
-
-enum UserType {
-    default = 0;
-    admin = 1;
 }

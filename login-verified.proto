@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+import "common.proto";
+
+option java_multiple_files = true;
+option java_package = "com.kotlang.auth.login";
+option java_outer_classname = "LoginVerifiedInternal";
+
+option go_package = "github.com/Kotlang/authGo/generated";
+
+package login;
+
+service loginVerified {
+	rpc requestProfileDeletion(ProfileDeletionRequest) returns (StatusResponse){}
+	
+	// Admin only APIs
+    rpc cancelProfileDeletionRequest(IdRequest) returns (StatusResponse){}
+    rpc blockUser(IdRequest) returns (StatusResponse) {}
+    rpc unblockUser(IdRequest) returns (StatusResponse) {}
+	rpc changeUserType(ChangeUserTypeRequest) returns (StatusResponse) {}
+	rpc isUserAdmin(IdRequest) returns (IsUserAdminResponse) {}
+    rpc deleteProfile(IdRequest) returns (StatusResponse){}
+    rpc getPendingProfileDeletionRequests(GetProfileDeletionRequest) returns (ProfileListResponse){}
+}
+
+message IsUserAdminResponse {
+	bool isAdmin = 1;
+}
+
+message GetProfileDeletionRequest {
+    int32 pageSize = 1;
+    int32 pageNumber = 2;
+}
+
+message ProfileDeletionRequest {
+    string reason = 1;
+}
+
+message ChangeUserTypeRequest {
+    string email = 1;
+    string phone = 2;
+    UserType userType = 3;
+}
+
+enum UserType {
+    default = 0;
+    admin = 1;
+}
