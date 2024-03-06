@@ -10,7 +10,7 @@ option go_package = "github.com/Kotlang/authGo/generated";
 
 package login;
 
-service loginVerified {
+service LoginVerified {
 	rpc requestProfileDeletion(ProfileDeletionRequest) returns (StatusResponse){}
 	
 	// Admin only APIs
