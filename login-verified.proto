@@ -43,6 +43,6 @@ message ChangeUserTypeRequest {
 }
 
 enum UserType {
-    default = 0;
+    member = 0;
     admin = 1;
 }
