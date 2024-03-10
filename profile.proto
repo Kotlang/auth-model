@@ -46,7 +46,7 @@ message CreateProfileRequest {
     Gender gender = 2;
     string photoUrl = 3;
     string bio = 4;
-    map<string, AddressProto> addresses = 5;
+    repeated AddressProto addresses = 5;
     string preferredLanguage = 6;
     FarmingType farmingType = 7;
     repeated string crops = 8;

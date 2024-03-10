@@ -61,7 +61,7 @@ message CreateOrUpdateLeadRequest {
 	OperatorType operatorType = 3;
 	LeadChannel channel = 4;
 	string source = 5;  // source of the lead (consider making an enum in the future)
-	map<string, AddressProto> addresses = 6;
+	repeated AddressProto addresses = 6;
 	LandSizeInAcres landSizeInAcres = 7;
 	FarmingType farmingType = 8;
 	CertificationDetails certificationDetails = 9;
@@ -80,7 +80,7 @@ message LeadProto {
     OperatorType operatorType = 4;
     LeadChannel channel = 5;
     string source = 6;  // source of the lead (consider making an enum in the future)
-    map<string, AddressProto> addresses = 7;
+    repeated AddressProto addresses = 7;
     LandSizeInAcres landSizeInAcres = 8;
     FarmingType farmingType = 9;
     CertificationDetails certificationDetails = 10;
@@ -118,9 +118,10 @@ message LeadFilters {
 }
 
 message AddressFilters {
-	string city = 1;
-    string state = 2;
-    string country = 3;
+    string type = 1;
+    string city = 2;
+    string state = 3;
+    string country = 4;
 }
 
 message LeadListResponse {
