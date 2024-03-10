@@ -1,0 +1,137 @@
+syntax = "proto3";
+
+import "common.proto";
+
+option java_multiple_files = true;
+option java_package = "com.kotlang.auth.login";
+option java_outer_classname = "leadInternal";
+
+option go_package = "github.com/Kotlang/authGo/generated";
+
+package login;
+
+service LeadService {
+	// Create a new lead in the system and return the lead Proto
+    rpc CreateLead (CreateOrUpdateLeadRequest) returns (LeadProto);
+
+	// Get a lead by its id
+    rpc GetLeadById (LeadIdRequest) returns (LeadProto);
+
+	// Get a list of leads by their ids
+	rpc BulkGetLeadsById (BulkIdRequest) returns (LeadListResponse);
+
+	// Update a lead in the system and return the lead Proto all fields are optional
+	// only the fields that are updated are required
+    rpc UpdateLead (CreateOrUpdateLeadRequest) returns (LeadProto);
+
+	// Delete a lead by its id
+    rpc DeleteLead (LeadIdRequest) returns (StatusResponse);
+
+	// Fetch leads based on the filters provided
+	// currently supported filters are operatorType, channel, source, landSizeInAcres, farmingType,
+	// certificationDetails, mainProfession, organizationName, sideProfession, education, status, addressFilters
+	rpc FetchLeads (FetchLeadsRequest) returns (LeadListResponse);
+}
+
+enum OperatorType {
+	UNSPECIFIED_OPERATOR = 0;
+    FARMER = 1;
+    INPUT_PROVIDER = 2;
+    AGRI_CONSULTANT = 3;
+    TRACENET_CONSULTANT = 4;
+}
+
+enum LeadChannel {
+	UNSPECIFIED_CHANNEL = 0;
+    WHATSAPP_GROUP = 1;
+    FACEBOOK_GROUP = 2;
+    FACEBOOK_AD = 3;
+}
+
+enum Status {
+	UNSPECIFIED_STATUS = 0;
+    RELEVANT = 1;
+    NOT_RELEVANT = 2;
+    NOW_VERIFIED = 3;
+}
+
+message CreateOrUpdateLeadRequest {
+	string name = 1;
+	string phoneNumber = 2;
+	OperatorType operatorType = 3;
+	LeadChannel channel = 4;
+	string source = 5;  // source of the lead (consider making an enum in the future)
+	map<string, AddressProto> addresses = 6;
+	LandSizeInAcres landSizeInAcres = 7;
+	FarmingType farmingType = 8;
+	CertificationDetails certificationDetails = 9;
+	repeated string crops = 10;
+	string mainProfession = 11;
+	string organizationName = 12;
+	string sideProfession = 13;
+	string userInterviewNotes = 14;
+	string education = 15;
+}
+
+message LeadProto {
+    string lead_id = 1;
+    string name = 2;
+    string phoneNumber = 3;
+    OperatorType operatorType = 4;
+    LeadChannel channel = 5;
+    string source = 6;  // source of the lead (consider making an enum in the future)
+    map<string, AddressProto> addresses = 7;
+    LandSizeInAcres landSizeInAcres = 8;
+    FarmingType farmingType = 9;
+    CertificationDetails certificationDetails = 10;
+    repeated string crops = 11;
+    string mainProfession = 12;
+    string organizationName = 13;
+    string sideProfession = 14;
+    string userInterviewNotes = 15;
+    string education = 16;
+    Status status = 17;
+	int64 createdOn = 18;
+	int64 updatedOn = 19;
+}
+
+// message to fetch leads
+message FetchLeadsRequest {
+	LeadFilters leadFilters = 1;
+	int32 pageNumber = 2;
+	int32 pageSize = 3;
+}
+
+message LeadFilters {
+    OperatorType operatorType = 1;
+    LeadChannel channel = 2;
+    string source = 3;
+    LandSizeInAcres landSizeInAcres = 4;
+    FarmingType farmingType = 5;
+    CertificationDetails certificationDetails = 6;
+    string mainProfession = 7;
+    string organizationName = 8;
+    string sideProfession = 9;
+    string education = 10;
+    Status status = 11;
+	AddressFilters addressFilters = 12;
+}
+
+message AddressFilters {
+	string city = 1;
+    string state = 2;
+    string country = 3;
+}
+
+message LeadListResponse {
+	repeated LeadProto leads = 1;
+	int64 totalLeads = 2;
+}
+
+message BulkIdRequest {
+	repeated string leadIds = 1;
+}
+
+message LeadIdRequest {
+	string leadId = 1;
+}
