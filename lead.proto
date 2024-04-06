@@ -115,6 +115,7 @@ message LeadFilters {
     string education = 10;
     Status status = 11;
 	AddressFilters addressFilters = 12;
+    repeated string phoneNumbers = 13;
 }
 
 message AddressFilters {
